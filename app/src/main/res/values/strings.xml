@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Flickrr</string>
+    <string name="open">Opening</string>
+    <string name="close">Closing</string>
 </resources>

@@ -1,0 +1,31 @@
+Downloaded from: justpaste.it/75213
+
+Android Development- Task 1
+
+TASKs:
+Make an image Gallery app using MVVM and Dependency Injection (Hilt).
+
+Should show recent images from flickr using API 1 on the homepage using recyclerview.
+
+Should have a left nav bar. Use “home” as the option.
+MUST USE - Retrofit for networking and glide for image downloading and showing.
+
+As a task submission, you will be required to send a 1-minute video of functionality to your hiring manager.
+
+Github code is only required when asked for.
+
+Use either Java or Kotlin.
+
+API 1- https://api.flickr.com/services/rest/?
+method=flickr.photos.getRecent&per_page=20&page=1&api_key=6f102c62f41998d151e5a1b48713cf13&format=j
+son&nojsoncallback=1&extras=url_s
+
+API 2-
+
+Flickrr - https://www.flickr.com/services/apps/72157719390081047/
+
+Key:
+121a07cdd1d6e975e5e6a4ac61a5a30c
+
+Secret:
+e2f9e812932e4184
