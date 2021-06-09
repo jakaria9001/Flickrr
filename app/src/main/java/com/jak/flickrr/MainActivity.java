@@ -10,6 +10,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -31,6 +34,8 @@ public class MainActivity extends AppCompatActivity {
     private ActionBarDrawerToggle mToggle;
     private RecyclerView recyclerView;
     private RequestQueue requestQueue;
+    private Button exploreButton;
+    private LinearLayout linearLayout;
 
     private List<Item> mList;
 
@@ -38,6 +43,16 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        linearLayout = findViewById(R.id.linearLayout);
+        exploreButton = (Button) findViewById(R.id.button);
+        exploreButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                recyclerView.setVisibility(View.VISIBLE);
+                linearLayout.setVisibility(View.GONE);
+            }
+        });
 
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
         mToggle = new ActionBarDrawerToggle(this, mDrawerLayout,R.string.open,R.string.close);
@@ -76,7 +91,7 @@ public class MainActivity extends AppCompatActivity {
                         JSONObject jsonObject1 = jsonArray.getJSONObject(i);
 
                         String imageUrl = jsonObject1.getString("url_s");
-                        String title = jsonObject1.getString("title");
+                        String title = jsonObject1.getString("id"); // fetching id rather than title as id is common to all
 
                         Item postItem = new Item(imageUrl, title);
                         mList.add(postItem);

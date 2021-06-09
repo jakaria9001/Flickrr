@@ -2,4 +2,7 @@
     <string name="app_name">Flickrr</string>
     <string name="open">Opening</string>
     <string name="close">Closing</string>
+    <string name="explore">Explore</string>
+    <string name="wc_message">A warm welcome to Flickrr, one stop solution to burn the stress away with amazing views.</string>
+    <string name="ensure_internet_connection">Please ensure you are connected to internet</string>
 </resources>

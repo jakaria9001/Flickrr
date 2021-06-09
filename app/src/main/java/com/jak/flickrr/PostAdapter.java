@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -33,9 +34,16 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull PostHolder holder, int position) {
-        Item item = postList.get(position);
+        final Item item = postList.get(position);
         holder.setImageView(item.getImageUrl());
         holder.setTitle(item.getTitle());
+
+        holder.imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                Toast.makeText(context, "Item with id = "+item.getTitle()+" is clicked", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override
@@ -61,7 +69,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostHolder> {
         }
         public void setTitle(String title){
             textView = (TextView) view.findViewById((R.id.titleTextView));
-            textView.setText(title);
+            textView.setText("Photo id = "  +  title);
         }
     }
 }
