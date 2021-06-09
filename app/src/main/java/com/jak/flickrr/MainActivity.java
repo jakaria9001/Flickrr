@@ -28,6 +28,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -47,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         linearLayout = findViewById(R.id.linearLayout);
-        exploreButton = (Button) findViewById(R.id.button);
+        exploreButton = findViewById(R.id.button);
         fab = findViewById(R.id.fab);
 
         exploreButton.setOnClickListener(new View.OnClickListener() {
@@ -60,42 +61,31 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
+        mDrawerLayout =  findViewById(R.id.drawerLayout);
         mToggle = new ActionBarDrawerToggle(this, mDrawerLayout,R.string.open,R.string.close);
 
         mDrawerLayout.addDrawerListener(mToggle);
         mToggle.syncState();
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
         // working gallery recyclerView
 
-        recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
+        recyclerView =  findViewById(R.id.recyclerView);
         recyclerView.hasFixedSize();
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         // using volley library to get requestQueue
-        requestQueue = VolleySingleton.getmInstance(this).getRequestQueue();
-
-        fetchData();
-
-        mList = new ArrayList<>();
+        fetchDataFromAPI();
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Toast.makeText(MainActivity.this, "Refreshing. . .", Toast.LENGTH_SHORT).show();
-//                finish();
-//                overridePendingTransition(0, 0);
-//                startActivity(getIntent());
-//                overridePendingTransition(0, 0);
-                requestQueue = VolleySingleton.getmInstance(MainActivity.this).getRequestQueue();
-
-                fetchData();
-
-                mList = new ArrayList<>();
+                fetchDataFromAPI();
             }
         });
+
     }
 
     private void fetchData() {
@@ -139,8 +129,36 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 
-        if(mToggle.onOptionsItemSelected(item))
+        if(mToggle.onOptionsItemSelected(item)) {
             return true;
+        }
+
         return super.onOptionsItemSelected(item);
+
+        //        int id = item.getItemId();
+        //
+        //        if (id == R.id.home) {
+        //            fetchDataFromAPI();
+        //        }
+        //
+        //        if (id == R.id.faq) {
+        //            Toast.makeText(this, "FAQ clicked", Toast.LENGTH_LONG).show();
+        //            return true;
+        //        }
+        //        if (id == R.id.about) {
+        //            Toast.makeText(this, "Showing About Us", Toast.LENGTH_LONG).show();
+        //            return true;
+        //        }
+        //
+        //        return super.onOptionsItemSelected(item);
     }
+
+    private void fetchDataFromAPI(){
+        requestQueue = VolleySingleton.getmInstance(MainActivity.this).getRequestQueue();
+
+        fetchData();
+
+        mList = new ArrayList<>();
+    }
+
 }
