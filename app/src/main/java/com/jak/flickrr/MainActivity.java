@@ -20,6 +20,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -36,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
     private RequestQueue requestQueue;
     private Button exploreButton;
     private LinearLayout linearLayout;
+    FloatingActionButton fab;
 
     private List<Item> mList;
 
@@ -46,13 +48,17 @@ public class MainActivity extends AppCompatActivity {
 
         linearLayout = findViewById(R.id.linearLayout);
         exploreButton = (Button) findViewById(R.id.button);
+        fab = findViewById(R.id.fab);
+
         exploreButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 recyclerView.setVisibility(View.VISIBLE);
                 linearLayout.setVisibility(View.GONE);
+                fab.setVisibility(View.VISIBLE);
             }
         });
+
 
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
         mToggle = new ActionBarDrawerToggle(this, mDrawerLayout,R.string.open,R.string.close);
@@ -75,6 +81,21 @@ public class MainActivity extends AppCompatActivity {
 
         mList = new ArrayList<>();
 
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(MainActivity.this, "Refreshing. . .", Toast.LENGTH_SHORT).show();
+//                finish();
+//                overridePendingTransition(0, 0);
+//                startActivity(getIntent());
+//                overridePendingTransition(0, 0);
+                requestQueue = VolleySingleton.getmInstance(MainActivity.this).getRequestQueue();
+
+                fetchData();
+
+                mList = new ArrayList<>();
+            }
+        });
     }
 
     private void fetchData() {
